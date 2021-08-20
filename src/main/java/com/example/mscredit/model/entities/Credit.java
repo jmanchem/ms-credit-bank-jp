@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = "credit")
@@ -15,16 +17,19 @@ import java.time.LocalDateTime;
 public class Credit {
 
     @Id
-    private String id;
-
-    @Field(name = "amount")
-    private Double amount;
-
+    private String creditId;
     @Field(name = "customerIdentityNumber")
     private String customerIdentityNumber;
-
-    @Field(name = "description")
-    private String description = "";
+    @Field(name = "creditNumber")
+    private String creditNumber;
+    @Field(name = "cardNumber")
+    private String cardNumber;
+    @Field(name = "typeCredit")
+    private String typeCredit;
+    @Field(name = "product")
+    private Product product;
+    @Field(name = "amount")
+    private Double amount;
 
     @Field(name = "consumDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")

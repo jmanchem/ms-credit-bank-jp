@@ -39,7 +39,7 @@ public class CreditHandler {
     public Mono<ServerResponse> save(ServerRequest request){
         Mono<Credit> product = request.bodyToMono(Credit.class);
         return product.flatMap(creditService::create)
-                .flatMap(p -> ServerResponse.created(URI.create("/api/client/".concat(p.getId())))
+                .flatMap(p -> ServerResponse.created(URI.create("/api/client/".concat(p.getCreditId())))
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(p))
                 .onErrorResume(error -> {
@@ -57,10 +57,10 @@ public class CreditHandler {
         String id = request.pathVariable("id");
         return product
                         .flatMap(p -> {
-                            p.setId(id);
+                            p.setCreditId(id);
                             return creditService.update(p);
                         })
-                        .flatMap(p-> ServerResponse.created(URI.create("/api/product/".concat(p.getId())))
+                        .flatMap(p-> ServerResponse.created(URI.create("/api/product/".concat(p.getCreditId())))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(p)
         );
